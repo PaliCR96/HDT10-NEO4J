@@ -1,9 +1,9 @@
-/**
+ee/**
  * Universidad del Valle de Guatemala
  * Algoritmos y Estructuras de Datos
  * Hoja de Trabajo 10: implementacion de neo4j en java
  * Andrés Girón, Paulina Cano y Brandon Hernandez
- * 09 de novviembre del 2016
+e * 09 de novviembre del 2016
  */
 
 import java.io.File;
@@ -13,7 +13,7 @@ import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
-import org.neo4j.graphdb.RelationshipType;
+eimport org.neo4j.graphdb.RelationshipType;
 import org.neo4j.graphdb.Result;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
@@ -48,7 +48,8 @@ public class MAIN {
 
         //TRNSACTION WITH NEO4J
 
-        try (Transaction tx = graphDb.beginTx()){
+
+		try (Transaction tx = graphDb.beginTx()){
             
             //PEOPLE NODES FOR EACH WORKER
             //ID FOR THE WORKER
@@ -61,7 +62,7 @@ public class MAIN {
             Node Per2 = graphDb.createNode(NodeType.People);
             Per2.setProperty("ID",2);
             Per2.setProperty("Nombre", "Persona 2");
-            
+l            
             Node Per3 = graphDb.createNode(NodeType.People);
             Per3.setProperty("ID",3);
             Per3.setProperty("Nombre", "Persona 3");
@@ -71,7 +72,7 @@ public class MAIN {
             Per4.setProperty("Nombre", "Persona 4");
             
             Node Per5 = graphDb.createNode(NodeType.People);
-            Per5.setProperty("ID",5);
+i            Per5.setProperty("ID",5);
             Per5.setProperty("Nombre", "Persona 5");
             
             Node Per6 = graphDb.createNode(NodeType.People);
@@ -81,7 +82,7 @@ public class MAIN {
             Node Per7 = graphDb.createNode(NodeType.People);
             Per7.setProperty("ID",7);
             Per7.setProperty("Nombre", "Persona 7");
-            
+a            
             Node Per8 = graphDb.createNode(NodeType.People);
             Per8.setProperty("ID",8);
             Per8.setProperty("Nombre", "Persona 8");
@@ -109,6 +110,197 @@ public class MAIN {
             Node Per14 = graphDb.createNode(NodeType.People);
             Per14.setProperty("ID",14);
             Per14.setProperty("Nombre", "Persona 14");
+			
+//********************* R E L A C I O N E S *********************************************************************
+	
+	    //Se crean relaciones entre los empleados, las cuales indican que se han enviado correos
+            //Se define cuantos correos ha mandado el empleado al otro
+			
+            Relationship P1P2 = Per1.createRelationshipTo(Per2,RelationType.Email);
+            P1P2.setProperty("Cantidad",3);
+            
+            Relationship P1P3 = Per1.createRelationshipTo(Per3,RelationType.Email);
+            P1P3.setProperty("Cantidad",2);
+            
+            Relationship P1P9 = Per1.createRelationshipTo(Per9,RelationType.Email);
+            P1P9.setProperty("Cantidad",6);
+            
+            Relationship P2P1 = Per2.createRelationshipTo(Per1,RelationType.Email);
+            P2P1.setProperty("Cantidad",5);
+            
+            Relationship P2P3 = Per2.createRelationshipTo(Per3,RelationType.Email);
+            P2P3.setProperty("Cantidad",8);
+            
+            Relationship P2P4 = Per2.createRelationshipTo(Per4,RelationType.Email);
+            P2P4.setProperty("Cantidad",2);
+            
+            Relationship P2P12 = Per2.createRelationshipTo(Per12,RelationType.Email);
+            P2P12.setProperty("Cantidad",1);
+            
+            Relationship P3P1 = Per3.createRelationshipTo(Per1,RelationType.Email);
+            P3P1.setProperty("Cantidad",5);
+            
+            Relationship P3P4 = Per3.createRelationshipTo(Per4,RelationType.Email);
+            P3P4.setProperty("Cantidad",2);
+            
+            Relationship P4P5 = Per4.createRelationshipTo(Per5,RelationType.Email);
+            P4P5.setProperty("Cantidad",5);
+            
+            Relationship P4P11 = Per4.createRelationshipTo(Per11,RelationType.Email);
+            P4P11.setProperty("Cantidad",2);
+            
+            Relationship P4P13 = Per4.createRelationshipTo(Per13,RelationType.Email);
+            P4P13.setProperty("Cantidad",3);
+            
+            Relationship P4P14 = Per4.createRelationshipTo(Per14,RelationType.Email);
+            P4P14.setProperty("Cantidad",7);
+            
+           Relationship P5P4 = Per5.createRelationshipTo(Per4,RelationType.Email);
+            P5P4.setProperty("Cantidad",2);
+            
+            Relationship P5P6 = Per5.createRelationshipTo(Per6,RelationType.Email);
+            P5P6.setProperty("Cantidad",6);
+            
+            Relationship P5P11 = Per5.createRelationshipTo(Per11,RelationType.Email);
+            P5P11.setProperty("Cantidad",4);
+            
+            Relationship P5P12 = Per5.createRelationshipTo(Per12,RelationType.Email);
+           P5P12.setProperty("Cantidad",3);
+            
+            Relationship P5P13 = Per5.createRelationshipTo(Per13,RelationType.Email);
+            P5P13.setProperty("Cantidad",7);
+            
+            Relationship P5P14 = Per5.createRelationshipTo(Per14,RelationType.Email);
+            P5P14.setProperty("Cantidad",9);
+       
+            Relationship P6P4 = Per6.createRelationshipTo(Per4,RelationType.Email);
+            P6P4.setProperty("Cantidad",6);
+            
+            Relationship P6P5 = Per6.createRelationshipTo(Per5,RelationType.Email);
+            P6P5.setProperty("Cantidad",2);
+            
+            Relationship P6P12 = Per6.createRelationshipTo(Per12,RelationType.Email);
+            P6P12.setProperty("Cantidad",7);
+            
+            Relationship P6P13 = Per6.createRelationshipTo(Per13,RelationType.Email);
+            P6P13.setProperty("Cantidad",7);
+            
+            Relationship P7P8 = Per7.createRelationshipTo(Per8,RelationType.Email);
+            P7P8.setProperty("Cantidad",12);
+            
+            Relationship P7P9 = Per7.createRelationshipTo(Per9,RelationType.Email);
+            P7P9.setProperty("Cantidad",13);
+            
+            Relationship P7P11 = Per7.createRelationshipTo(Per11,RelationType.Email);
+            P7P11.setProperty("Cantidad",1);
+            
+            Relationship P8P6 = Per8.createRelationshipTo(Per6,RelationType.Email);
+            P8P6.setProperty("Cantidad",3);
+            
+            Relationship P8P7 = Per8.createRelationshipTo(Per7,RelationType.Email);
+            P8P7.setProperty("Cantidad",14);
+            
+            Relationship P8P9 = Per8.createRelationshipTo(Per9,RelationType.Email);
+            P8P9.setProperty("Cantidad",21);
+            
+            Relationship P8P10 = Per8.createRelationshipTo(Per10,RelationType.Email);
+            P8P10.setProperty("Cantidad",2);
+            
+            Relationship P9P5 = Per9.createRelationshipTo(Per5,RelationType.Email);
+            P9P5.setProperty("Cantidad",4);
+            
+            Relationship P9P7 = Per9.createRelationshipTo(Per7,RelationType.Email);
+            P9P7.setProperty("Cantidad",12);
+            
+            Relationship P9P8 = Per9.createRelationshipTo(Per8,RelationType.Email);
+            P9P8.setProperty("Cantidad",23);
+            
+            Relationship P10P4 = Per10.createRelationshipTo(Per4,RelationType.Email);
+            P10P4.setProperty("Cantidad",9);
+            
+            Relationship P10P5 = Per10.createRelationshipTo(Per5,RelationType.Email);
+            P10P5.setProperty("Cantidad",7);
+            
+            Relationship P10P6 = Per10.createRelationshipTo(Per6,RelationType.Email);
+            P10P6.setProperty("Cantidad",1);
+            
+            Relationship P10P7 = Per10.createRelationshipTo(Per7,RelationType.Email);
+            P10P7.setProperty("Cantidad",1);
+            
+            Relationship P10P11 = Per10.createRelationshipTo(Per11,RelationType.Email);
+            P10P11.setProperty("Cantidad",5);
+            
+            Relationship P10P12 = Per10.createRelationshipTo(Per12,RelationType.Email);
+            P10P12.setProperty("Cantidad",4);
+            
+            Relationship P10P13 = Per10.createRelationshipTo(Per13,RelationType.Email);
+            P10P13.setProperty("Cantidad",8);
+            
+            Relationship P10P14 = Per10.createRelationshipTo(Per14,RelationType.Email);
+            P10P14.setProperty("Cantidad",7);
+            
+            Relationship P11P4 = Per11.createRelationshipTo(Per4,RelationType.Email);
+            P11P4.setProperty("Cantidad",4);
+            
+            Relationship P11P6 = Per11.createRelationshipTo(Per6,RelationType.Email);
+            P11P6.setProperty("Cantidad",1);
+            
+            Relationship P11P10 = Per11.createRelationshipTo(Per10,RelationType.Email);
+            P11P10.setProperty("Cantidad",1);
+                      
+            Relationship P11P13 = Per11.createRelationshipTo(Per13,RelationType.Email);
+            P11P13.setProperty("Cantidad",9);
+            
+            Relationship P11P14 = Per11.createRelationshipTo(Per14,RelationType.Email);
+            P11P14.setProperty("Cantidad",1);
+            
+            Relationship P12P4 = Per12.createRelationshipTo(Per4,RelationType.Email);
+            P12P4.setProperty("Cantidad",4);
+            
+            Relationship P12P5 = Per12.createRelationshipTo(Per5,RelationType.Email);
+            P12P5.setProperty("Cantidad",4);
+            
+            Relationship P12P6 = Per12.createRelationshipTo(Per6,RelationType.Email);
+            P12P6.setProperty("Cantidad",9);
+            
+            Relationship P12P10 = Per12.createRelationshipTo(Per10,RelationType.Email);
+            P12P10.setProperty("Cantidad",2);
+            
+            Relationship P12P11 = Per12.createRelationshipTo(Per11,RelationType.Email);
+            P12P11.setProperty("Cantidad",4);
+            
+            Relationship P12P13 = Per12.createRelationshipTo(Per13,RelationType.Email);
+            P12P13.setProperty("Cantidad",8);
+            
+            Relationship P12P14 = Per12.createRelationshipTo(Per14,RelationType.Email);
+            P12P14.setProperty("Cantidad",9);
+            
+            Relationship P13P4 = Per13.createRelationshipTo(Per4,RelationType.Email);
+            P13P4.setProperty("Cantidad",1);
+            
+            Relationship P13P5 = Per13.createRelationshipTo(Per5,RelationType.Email);
+            P13P5.setProperty("Cantidad",3);
+            
+            Relationship P13P10 = Per13.createRelationshipTo(Per10,RelationType.Email);
+            P13P10.setProperty("Cantidad",2);
+            
+            Relationship P13P11= Per13.createRelationshipTo(Per11,RelationType.Email);
+            P13P11.setProperty("Cantidad",3);
+            
+            Relationship P13P12 = Per13.createRelationshipTo(Per2,RelationType.Email);
+            P13P12.setProperty("Cantidad",2);
+            
+            Relationship P14P4 = Per14.createRelationshipTo(Per4,RelationType.Email);
+            P14P4.setProperty("Cantidad",7);
+            
+            Relationship P14P10 = Per14.createRelationshipTo(Per10,RelationType.Email);
+            P14P10.setProperty("Cantidad",6);
+            
+            Relationship P14P11 = Per14.createRelationshipTo(Per11,RelationType.Email);
+            P14P11.setProperty("Cantidad",8);
+            
+            Relationship P14P12 = Per14.createRelationshipTo(Per12,RelationType.Email);
+            P14P12.setProperty("Cantidad",3);
             
             tx.success();        
         } 
