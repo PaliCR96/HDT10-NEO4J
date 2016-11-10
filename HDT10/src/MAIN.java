@@ -18,8 +18,7 @@ import org.neo4j.graphdb.Result;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.logging.LogProvider;
-import java.util.LinkedList;
-import java.util.Iterator;
+import java.util.*;
 
 public class MAIN {
     
@@ -341,7 +340,7 @@ public class MAIN {
 //********* SE MUESTRAN LAS RELACIONES EN DONDE SE HAYAN MANDADO MAS DE 6 CORREOS ****************************************
 	
 	    //EL PROCEDIMIENTO ES IGUAL, PERO AHORA LIMITADO A 6
-            System.out.println("\n\n INCISO B ");
+            System.out.println("\n INCISO B ");
 	    System.out.println("Las siguientes personas han enviado 6 correos o más:\n");
 		
             res4 = DataBase.execute("MATCH (P1:People)-[C:Email]->(P2:People) WHERE C.Cantidad > 6 RETURN P1.Nombre");
@@ -374,6 +373,7 @@ public class MAIN {
 //********* I N C I S O * C * NO SE HACE****************************************************************************************
 	    System.out.println("INCISO C NO SE PUEDE HACER");
 	    System.out.println("**********************************************************************************************");
+	    System.out.println("");
 		
 //********* I N C I S O * E ****************************************************************************************************		
 //************* MOSTRAR * PERSONAS * MAS * Y * MENOS * COMUNICADAS ****************************************************
@@ -402,11 +402,98 @@ public class MAIN {
             }
             
             for(int i=0; i<degrees.length; i++){
-		System.out.println("  "+i+". Persona "+ (order[i]+1));
+		System.out.println("  "+(i+1)+". Persona "+ (order[i]+1));
             }
 		
             System.out.println("");
 		
+//********* I N C I S O * F ****************************************************************************************************		
+//************* MOSTRAR * CANTIDAD * MINIMA * DE * CORREOS * ENVIADOS **********************************************************
+		
+	    //SE CREA VECTOR CON LOS IDs y con las Cantidades de correo
+            Vector<Integer> vectID= new Vector<>();
+            Vector<Long> vectCant= new Vector<>();
+		
+            for(int i=0; i<196; i++){
+                try{
+                    Relationship rel= DataBase.getRelationshipById(i);
+                    long cantidad = (long) rel.getProperty("Cantidad");
+                    vectID.addElement(i);
+                    vectCant.addElement(cantidad); 
+                }catch(Exception e){
+                    //necesario por el error que conlleva el casteo
+                }
+            }
+        
+            //SCANNER PARA SOLICITAR LOS DATOS
+            Scanner scan= new Scanner(System.in);
+            int entrada;
+            int destino;
+        
+            //INGRESO DE LA PERSONA DE BÚSQUEDA
+            System.out.println("Ingrese el número de la persona origen: ");
+            entrada= scan.nextInt() - 1;
+            int input=entrada;
+        
+            //INGRESO DE LA PERSONA DESTINO
+            System.out.println("Ingrese el número de la persona destino (para mostrar todas las relaciones ingrese 0): ");
+            destino = scan.nextInt() - 1;
+				
+            //ARRAYS PARA ALMACENAMIENTO DE VALORES
+	    int[] from= new int[14];
+	    boolean[] temps = new boolean[14];
+	    long[] nodes = new long[14];	
+	    for(int i = 0; i < 14; i++){
+		    nodos[i] = 9999;
+		    temps[i] = false;
+	    }	
+            nodes[entrada]=0;
+            from[entrada]=entrada;
+			
+            for(int i = 0; i < 14; i++){
+                for(int j = 0; j < vectID.size(); j++){
+                    Relationship relation = DataBase.getRelationshipById(vectorID.get(j));
+                    int riuk = (int)relation.getStartNode().getId();
+                    int riuk1 = (int)relation.getEndNode().getId();
+                    long longest = (long) relation.getProperty("Cantidad");
+                    if(riuk==entrada & (nodes[riuk1]>(nodes[entrada]+l1))){
+                    	nodes[riuk1]=nodes[entrada]+l1;
+                        from[riuk1]=entrada;
+                    }
+                }
+                // Se encuentra el menor de los nodos temporales
+                long bel= 10000;
+                int  mel =-1;
+                for(int k=0; k<nodes.length; k++){
+                    long dell= nodes[k];
+                    if(temps[k]==false & (dell<=bel)){
+                    	bel=dell;
+                        mel=k;
+                    }
+		}
+                temps[mel]=true;
+                entrada=mel;						
+            } 
+         
+            if (destino==-1){
+                //para todos los nodos
+                for (int i=0; i<14; i++){
+                    long HQ= nodes[i];
+                    if(HQ==9999)
+                        System.out.println("Persona "+(input+1)+" no ha mandado correos a Persona "+(i+1));
+                    else	
+                        System.out.println("La cantidad mínima de correos enviados de Persona "+(input+1)+" a Persona"+(i+1)+" es: "+HQ);
+                }
+            }else{
+                //dado un nodo destino 
+                long kora=nodes[destino];
+                //Si la correlacion nunca fue modificada
+                if(kora==9999)
+                    System.out.println("Persona "+(input+1)+" no ha mandado correos a Persona "+(destino+1));
+                else
+                    //Caso contrario
+                    System.out.println("La cantidad mínima de correos enviados de Persona "+(input+1)+" a Persona"+(destino+1)+" es: "+kora);
+            }
 		
             tx.success();        
         }
