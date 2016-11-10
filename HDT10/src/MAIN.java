@@ -444,7 +444,7 @@ public class MAIN {
 	    boolean[] temps = new boolean[14];
 	    long[] nodes = new long[14];	
 	    for(int i = 0; i < 14; i++){
-		    nodos[i] = 9999;
+		    nodes[i] = 9999;
 		    temps[i] = false;
 	    }	
             nodes[entrada]=0;
@@ -452,12 +452,12 @@ public class MAIN {
 			
             for(int i = 0; i < 14; i++){
                 for(int j = 0; j < vectID.size(); j++){
-                    Relationship relation = DataBase.getRelationshipById(vectorID.get(j));
+                    Relationship relation = DataBase.getRelationshipById(vectID.get(j));
                     int riuk = (int)relation.getStartNode().getId();
                     int riuk1 = (int)relation.getEndNode().getId();
                     long longest = (long) relation.getProperty("Cantidad");
-                    if(riuk==entrada & (nodes[riuk1]>(nodes[entrada]+l1))){
-                    	nodes[riuk1]=nodes[entrada]+l1;
+                    if(riuk==entrada & (nodes[riuk1]>(nodes[entrada]+longest))){
+                    	nodes[riuk1]=nodes[entrada]+longest;
                         from[riuk1]=entrada;
                     }
                 }
