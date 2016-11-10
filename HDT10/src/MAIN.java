@@ -300,7 +300,8 @@ public class MAIN {
             
             Relationship P14P12 = Per14.createRelationshipTo(Per12,RelationType.Email);
             P14P12.setProperty("Cantidad",3);
-            
+         
+//********* I N C I S O * A ***************************************************************************************************		
 //************* M O S T R A R * R E L A C I O N E S * E N * P A N T A L L A ****************************************************
 
             System.out.println("Se imprimen las relaciones del grafo:\n");
@@ -335,8 +336,8 @@ public class MAIN {
                 System.out.println("La "+resultado1.get(i)+" envió "+resultado3.get(i)+" correos a la "+resultado2.get(i));
             }
 
-//********* I N C I S O * A ******************************************************************************************
-//********* SE MUESTRAN LAS RELACIONES EN DONDE SE HAYAN MANDADO MAS DE 6 CORREOS ***********************************
+//********* I N C I S O * B **********************************************************************************************
+//********* SE MUESTRAN LAS RELACIONES EN DONDE SE HAYAN MANDADO MAS DE 6 CORREOS ****************************************
 	
 	    //EL PROCEDIMIENTO ES IGUAL, PERO AHORA LIMITADO A 6
             System.out.println("\n\n INCISO A ");
