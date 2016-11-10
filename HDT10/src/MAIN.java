@@ -369,7 +369,42 @@ public class MAIN {
                 System.out.println("La "+resultado4.get(i)+" envió "+resultado6.get(i)+" correos a la "+resultado5.get(i));
             }
             System.out.println("");
+		
+//********* I N C I S O * C * NO SE HACE****************************************************************************************
+		
+//********* I N C I S O * E ****************************************************************************************************		
+//************* MOSTRAR * PERSONAS * MAS * Y * MENOS * COMUNICADAS ****************************************************
+
+	    System.out.println("INCISO E: mostrar personas mas y menos comunicadas \n");
+	    //El largo es 14 porque tenemos a 14 personas distintas
+            int[] degrees = new int[14];
+            int[] order = new int[degrees.length];
+	    int key=-1;
+		
+	    //GRADOS DE c/NODO	
+            for (int i=0; i<degrees.length; i++)
+		degrees[i]=DataBase.getNodeById(i).getDegree(Direction.BOTH);
+	   //GRADOS EN DESCENDENTE
+            for (int i=0; i<degrees.length; i++){
+		int bel=0;
+		for(int j=0; j<degrees.length; j++){
+                    int deg= degrees[j];
+                    if (deg>=bel){
+			bel=deg;
+			key=j;
+                    }
+		}
+            	order[i]=key;
+            	degrees[key]=0;
+            }
             
+            for(int i=0; i<degrees.length; i++){
+		System.out.println("-Persona "+ (order[i]+1));
+            }
+		
+            System.out.println("");
+		
+		
             tx.success();        
         }
         //ESTO APAGA LA BASE DE DATOS, TODO SE DA POR TERMIANDO
