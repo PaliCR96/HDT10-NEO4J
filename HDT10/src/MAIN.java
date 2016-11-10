@@ -1,9 +1,9 @@
-ee/**
+/**
  * Universidad del Valle de Guatemala
  * Algoritmos y Estructuras de Datos
  * Hoja de Trabajo 10: implementacion de neo4j en java
  * Andrés Girón, Paulina Cano y Brandon Hernandez
-e * 09 de novviembre del 2016
+ * 09 de novviembre del 2016
  */
 
 import java.io.File;
@@ -13,7 +13,7 @@ import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
-eimport org.neo4j.graphdb.RelationshipType;
+import org.neo4j.graphdb.RelationshipType;
 import org.neo4j.graphdb.Result;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
@@ -22,6 +22,8 @@ import java.util.LinkedList;
 import java.util.Iterator;
 
 public class MAIN {
+    
+    static Result res1, res2, res3, res4, res5, res6;
     
     //ENUMERACIÓN TIPO NODO, IMPLEMENTA LABEL
     public enum NodeType implements Label{
@@ -32,8 +34,6 @@ public class MAIN {
         Email;
     }
 
-    static Result res1, res2, res3, res4, res5, res6;
-
 	public static void main(String[] args) {
 
         //FACTORY TO CREATE A DATABASE
@@ -43,71 +43,70 @@ public class MAIN {
         File address = new File("C:\\Users\\usuario\\Documents\\Neo4j\\default.graphdb");
 
         //FILE OBJECT TO REACH THE GRAPH
-        GraphDatabaseService graphDb = dbFactory.newEmbeddedDatabase(address);
-        graphDb.execute("MATCH (n)\n" + "OPTIONAL MATCH (n)-[r]-()\n" + "DELETE n,r");
+        GraphDatabaseService DataBase = dbFactory.newEmbeddedDatabase(address);
+        DataBase.execute("MATCH (n)\n" + "OPTIONAL MATCH (n)-[r]-()\n" + "DELETE n,r");
 
         //TRNSACTION WITH NEO4J
-
-
-		try (Transaction tx = graphDb.beginTx()){
+	try (Transaction tx = DataBase.beginTx()){
             
-            //PEOPLE NODES FOR EACH WORKER
+//**************** P E O P L E * N O D E S * F O R * E A C H * W O R K E R *******************************************************************
+            
             //ID FOR THE WORKER
             //& NAME OF THE WORKER
 
-            Node Per1 = graphDb.createNode(NodeType.People);
+            Node Per1 = DataBase.createNode(NodeType.People);
             Per1.setProperty("ID",1);
             Per1.setProperty("Nombre", "Persona 1");
             
-            Node Per2 = graphDb.createNode(NodeType.People);
+            Node Per2 = DataBase.createNode(NodeType.People);
             Per2.setProperty("ID",2);
             Per2.setProperty("Nombre", "Persona 2");
-l            
-            Node Per3 = graphDb.createNode(NodeType.People);
+            
+            Node Per3 = DataBase.createNode(NodeType.People);
             Per3.setProperty("ID",3);
             Per3.setProperty("Nombre", "Persona 3");
             
-            Node Per4 = graphDb.createNode(NodeType.People);
+            Node Per4 = DataBase.createNode(NodeType.People);
             Per4.setProperty("ID",4);
             Per4.setProperty("Nombre", "Persona 4");
             
-            Node Per5 = graphDb.createNode(NodeType.People);
-i            Per5.setProperty("ID",5);
+            Node Per5 = DataBase.createNode(NodeType.People);
+            Per5.setProperty("ID",5);
             Per5.setProperty("Nombre", "Persona 5");
             
-            Node Per6 = graphDb.createNode(NodeType.People);
+            Node Per6 = DataBase.createNode(NodeType.People);
             Per6.setProperty("ID",6);
             Per6.setProperty("Nombre", "Persona 6");
             
-            Node Per7 = graphDb.createNode(NodeType.People);
+            Node Per7 = DataBase.createNode(NodeType.People);
             Per7.setProperty("ID",7);
             Per7.setProperty("Nombre", "Persona 7");
-a            
-            Node Per8 = graphDb.createNode(NodeType.People);
+           
+            Node Per8 = DataBase.createNode(NodeType.People);
             Per8.setProperty("ID",8);
             Per8.setProperty("Nombre", "Persona 8");
             
-            Node Per9 = graphDb.createNode(NodeType.People);
+            Node Per9 = DataBase.createNode(NodeType.People);
             Per9.setProperty("ID",9);
             Per9.setProperty("Nombre", "Persona 9");
             
-            Node Per10 = graphDb.createNode(NodeType.People);
+            Node Per10 = DataBase.createNode(NodeType.People);
             Per10.setProperty("ID",10);
             Per10.setProperty("Nombre", "Persona 10");
             
-            Node Per11 = graphDb.createNode(NodeType.People);
+            Node Per11 = DataBase.createNode(NodeType.People);
             Per11.setProperty("ID",11);
             Per11.setProperty("Nombre", "Persona 11");
             
-            Node Per12 = graphDb.createNode(NodeType.People);
+            Node Per12 = DataBase.createNode(NodeType.People);
             Per12.setProperty("ID",12);
             Per12.setProperty("Nombre", "Persona 12");
             
-            Node Per13 = graphDb.createNode(NodeType.People);
+            Node Per13 = DataBase.createNode(NodeType.People);
             Per13.setProperty("ID",13);
             Per13.setProperty("Nombre", "Persona 13");
             
-            Node Per14 = graphDb.createNode(NodeType.People);
+            Node Per14 = DataBase.createNode(NodeType.People);
             Per14.setProperty("ID",14);
             Per14.setProperty("Nombre", "Persona 14");
 			
@@ -302,8 +301,43 @@ a
             Relationship P14P12 = Per14.createRelationshipTo(Per12,RelationType.Email);
             P14P12.setProperty("Cantidad",3);
             
+//************* M O S T R A R * R E L A C I O N E S * E N * P A N T A L L A ****************************************************
+
+            System.out.println("Se imprimen las relaciones del grafo:\n");
+            
+            //QUERIES PARA VER NODOS Y RELACIONES
+            res1 = DataBase.execute("MATCH (P1:People)-[C:Email]->(P2:People) RETURN P1.Nombre");
+            res2 = DataBase.execute("MATCH (P1:People)-[C:Email]->(P2:People) RETURN P2.Nombre");
+            res3 = DataBase.execute("MATCH (P1:People)-[C:Email]->(P2:People) RETURN C.Cantidad");
+            
+            //RESULT PUEDE RETORNAR UN ITERADOR
+            Iterator<String>r1=res1.columnAs("P1.Nombre");
+            Iterator<String>r2=res2.columnAs("P2.Nombre");
+            Iterator<String>r3=res3.columnAs("C.Cantidad");
+            
+            //LINKED LISTS PARA INGRESAR LOS DATOS
+            LinkedList<String> resultado1 = new LinkedList();
+            LinkedList<String> resultado2 = new LinkedList();
+            LinkedList<Object> resultado3 = new LinkedList();
+            
+            //ADICION DE LOS DATOS A LA LISTA
+            while( r1.hasNext() & r2.hasNext() & r3.hasNext()){
+                resultado1.add(r1.next());
+                resultado2.add(r2.next());
+                resultado3.add(r3.next());
+            }        
+            
+            //TAMAÑO DE LA LISTA
+            int size2 = resultado1.size();
+            
+            //IMPRESIÓN DE DATOS
+            for(int i=0; i<size2; i++){
+                System.out.println("La "+resultado1.get(i)+" envió "+resultado3.get(i)+" correos a la "+resultado2.get(i));
+            }
+            
             tx.success();        
-        } 
-        graphDb.shutdown();
+        }
+        //ESTO APAGA LA BASE DE DATOS, TODO SE DA POR TERMIANDO
+        DataBase.shutdown();
     }
 }
