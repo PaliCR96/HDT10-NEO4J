@@ -2,7 +2,7 @@
  * Universidad del Valle de Guatemala
  * Algoritmos y Estructuras de Datos
  * Hoja de Trabajo 10: implementacion de neo4j en java
- * Andrés Girón, Paulina Cano y Brandon Hernandez
+ * Andrés Girón 15174, Paulina Cano 15053 y Brandon Hernandez 15326
  * 09 de novviembre del 2016
  */
 
@@ -371,7 +371,7 @@ public class MAIN {
             System.out.println("");
 		
 //********* I N C I S O * C * NO SE HACE****************************************************************************************
-	    System.out.println("INCISO C NO SE PUEDE HACER");
+	    System.out.println("INCISO C: no se hace, la Base de Datos dada no presenta autoenvios de correos en eprsonas");
 	    System.out.println("**********************************************************************************************");
 	    System.out.println("");
 		
