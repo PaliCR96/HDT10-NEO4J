@@ -304,7 +304,8 @@ public class MAIN {
 //********* I N C I S O * A ***************************************************************************************************		
 //************* M O S T R A R * R E L A C I O N E S * E N * P A N T A L L A ****************************************************
 
-            System.out.println("Se imprimen las relaciones del grafo:\n");
+            System.out.println("INCISO A");
+	    System.out.println("Se imprimen las relaciones del grafo:\n");
             
             //QUERIES PARA VER NODOS Y RELACIONES
             res1 = DataBase.execute("MATCH (P1:People)-[C:Email]->(P2:People) RETURN P1.Nombre");
@@ -340,7 +341,7 @@ public class MAIN {
 //********* SE MUESTRAN LAS RELACIONES EN DONDE SE HAYAN MANDADO MAS DE 6 CORREOS ****************************************
 	
 	    //EL PROCEDIMIENTO ES IGUAL, PERO AHORA LIMITADO A 6
-            System.out.println("\n\n INCISO A ");
+            System.out.println("\n\n INCISO B ");
 	    System.out.println("Las siguientes personas han enviado 6 correos o más:\n");
 		
             res4 = DataBase.execute("MATCH (P1:People)-[C:Email]->(P2:People) WHERE C.Cantidad > 6 RETURN P1.Nombre");
@@ -371,6 +372,8 @@ public class MAIN {
             System.out.println("");
 		
 //********* I N C I S O * C * NO SE HACE****************************************************************************************
+	    System.out.println("INCISO C NO SE PUEDE HACER");
+	    System.out.println("**********************************************************************************************");
 		
 //********* I N C I S O * E ****************************************************************************************************		
 //************* MOSTRAR * PERSONAS * MAS * Y * MENOS * COMUNICADAS ****************************************************
@@ -399,7 +402,7 @@ public class MAIN {
             }
             
             for(int i=0; i<degrees.length; i++){
-		System.out.println("-Persona "+ (order[i]+1));
+		System.out.println("  "+i+". Persona "+ (order[i]+1));
             }
 		
             System.out.println("");
