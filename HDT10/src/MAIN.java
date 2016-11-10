@@ -328,12 +328,46 @@ public class MAIN {
             }        
             
             //TAMAÑO DE LA LISTA
-            int size2 = resultado1.size();
+            int size1 = resultado1.size();
             
             //IMPRESIÓN DE DATOS
-            for(int i=0; i<size2; i++){
+            for(int i=0; i<size1; i++){
                 System.out.println("La "+resultado1.get(i)+" envió "+resultado3.get(i)+" correos a la "+resultado2.get(i));
             }
+
+//********* I N C I S O * A ******************************************************************************************
+//********* SE MUESTRAN LAS RELACIONES EN DONDE SE HAYAN MANDADO MAS DE 6 CORREOS ***********************************
+	
+	    //EL PROCEDIMIENTO ES IGUAL, PERO AHORA LIMITADO A 6
+            System.out.println("\n\n INCISO A ");
+	    System.out.println("Las siguientes personas han enviado 6 correos o más:\n");
+		
+            res4 = DataBase.execute("MATCH (P1:People)-[C:Email]->(P2:People) WHERE C.Cantidad > 6 RETURN P1.Nombre");
+            res5 = DataBase.execute("MATCH (P1:People)-[C:Email]->(P2:People) WHERE C.Cantidad > 6 RETURN P2.Nombre");
+            res6 = DataBase.execute("MATCH (P1:People)-[C:Email]->(P2:People) WHERE C.Cantidad > 6 RETURN C.Cantidad");
+            
+            Iterator<String>r4=res4.columnAs("P1.Nombre");
+            Iterator<String>r5=res5.columnAs("P2.Nombre");
+            Iterator<String>r6=res6.columnAs("C.Cantidad");
+            
+            LinkedList<String> resultado4 = new LinkedList();
+            LinkedList<String> resultado5 = new LinkedList();
+            LinkedList<Object> resultado6 = new LinkedList();
+            
+            //ADICION DE LOS DATOS A LA LISTA
+            while( r4.hasNext() & r5.hasNext() & r6.hasNext()){
+                resultado4.add(r4.next());
+                resultado5.add(r5.next());
+                resultado6.add(r6.next());
+            }  
+            
+            int size2 = resultado4.size();
+            
+	    //IMPRESION DE LOS RESULTADOS
+            for(int i=0; i<size2; i++){
+                System.out.println("La "+resultado4.get(i)+" envió "+resultado6.get(i)+" correos a la "+resultado5.get(i));
+            }
+            System.out.println("");
             
             tx.success();        
         }
